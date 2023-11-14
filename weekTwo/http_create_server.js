@@ -6,7 +6,13 @@ http
         res.writeHead(200,{
             'Content-Type': 'text/html',
         })
-        res.write('Hello Word');
+        if (url == '/about') {
+            res.write('About');
+        } else if (url == '/contact') {
+            res.write('Contact');
+        } else {
+            res.write('Home')
+        }
         res.end();
     })
     .listen(3000, () =>{
