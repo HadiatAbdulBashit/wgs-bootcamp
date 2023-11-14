@@ -37,7 +37,7 @@ const askQuestion = async () => {
     readline.close();
 
     showNewContact(newContact);
-    saveContact(newContact)
+    saveContact(newContact.name, newContact.phone, newContact.email)
 }
 
 askQuestion();
