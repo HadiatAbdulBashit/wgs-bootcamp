@@ -50,12 +50,89 @@ yargs.command({
       type: 'string'
     }
   },
-  handler (argv) {
+  handler(argv) {
     const data = JSON.parse(savedContact);
-    const selectedData = data.find(contact => contact.name = argv.name);
+    const selectedData = data.find(contact => contact.name == argv.name);
     console.log('Name  ', selectedData.name);
     console.log('Phone ', selectedData.phone);
     console.log('Email ', selectedData.email);
+  }
+})
+
+yargs.command({
+  command: 'update',
+  describe: 'Update selected contact',
+  builder: {
+    name: {
+      describe: 'Name',
+      type: 'string'
+    },
+    phone: {
+      describe: 'Phone',
+      type: 'string'
+    },
+    email: {
+      describe: 'Email',
+      type: 'string'
+    },
+    selectName: {
+      describe: 'Selected name',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler(argv) {
+    const data = JSON.parse(savedContact);
+    const selectedData = data.find(contact => contact.name === argv.selectName);
+    // const selectedIndex = data.findIndex(contact => contact.name === argv.selectName);
+
+    if (selectedData == undefined) {
+      console.log('Data tidak di temukan');
+    } else {
+      selectedData.name = argv.name ?? selectedData.name
+      selectedData.phone = argv.phone ?? selectedData.phone
+      selectedData.email = argv.email ?? selectedData.email
+
+      fs.writeFile('./data/contacts.json', JSON.stringify(data), 'utf8', (err) => {
+        if (err) {
+          console.error('Error write to file:', err);
+        } else {
+          console.log('Contact updated!');
+        }
+      });
+    }
+  }
+})
+
+yargs.command({
+  command: 'delete',
+  describe: 'Delete selected contact',
+  builder: {
+    name: {
+      describe: 'Name',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler(argv) {
+    const data = JSON.parse(savedContact);
+    const selectedData = data.find(contact => contact.name === argv.name);
+    const selectedIndex = data.findIndex(contact => contact.name === argv.name);
+
+    // console.log(data);
+    if (selectedData == undefined) {
+      console.log('Data tidak di temukan');
+    } else {
+      data.splice(selectedIndex, 1)
+      
+      fs.writeFile('./data/contacts.json', JSON.stringify(data), 'utf8', (err) => {
+        if (err) {
+          console.error('Error write to file:', err);
+        } else {
+          console.log('Contact deleted!');
+        }
+      });
+    }
   }
 })
 
