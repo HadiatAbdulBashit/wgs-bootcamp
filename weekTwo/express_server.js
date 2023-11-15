@@ -4,9 +4,11 @@ var expressLayouts = require('express-ejs-layouts');
 const app = express()
 const port = 3000
 
+app.use(express.static('public'));
+
 const contacts = [
     {
-        nama: 'hadiat', 
+        nama: 'hadiat',
         telp: '08231827612'
     },
     {
@@ -24,14 +26,20 @@ app.set('view engine', 'ejs')
 
 app.use(expressLayouts);
 
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+})
+
 app.get('/', (req, res) => {
-    res.render('index', {title: 'Home'})
+    res.render('index', { title: 'Home' })
 })
 app.get('/about', (req, res) => {
-    res.render('about', {nama: 'Hadiat Abdul', title: 'About'})
+    res.render('about', { nama: 'Hadiat Abdul', title: 'About' })
+    // next()
 })
 app.get('/contact', (req, res) => {
-    res.render('contact', {contacts,  title: 'Contact'})
+    res.render('contact', { contacts, title: 'Contact' })
 })
 app.get('/product/:id', (req, res) => {
     res.send('<h1>product id: ' + req.params.id + '<br>Category: ' + req.query.category + '<h1>')
