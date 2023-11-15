@@ -9,11 +9,11 @@ const server = http.createServer((req, res) => {
     let filePath = '';
 
     if (url === '/') {
-        filePath = './views/index.html'; // Home page
+        filePath = './views/html/index.html'; // Home page
     } else if (url === '/about') {
-        filePath = './views/about.html'; // About page
+        filePath = './views/html/about.html'; // About page
     } else if (url === '/contact') {
-        filePath = './views/contact.html'; // Contact page
+        filePath = './views/html/contact.html'; // Contact page
     } else {
         // Jika URL tidak dikenali, kembalikan 404 Not Found
         res.writeHead(404, { 'Content-Type': 'text/plain' });
