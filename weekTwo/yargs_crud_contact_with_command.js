@@ -84,7 +84,6 @@ yargs.command({
   handler(argv) {
     const data = JSON.parse(savedContact);
     const selectedData = data.find(contact => contact.name === argv.selectName);
-    // const selectedIndex = data.findIndex(contact => contact.name === argv.selectName);
 
     if (selectedData == undefined) {
       console.log('Data tidak di temukan');
@@ -119,7 +118,6 @@ yargs.command({
     const selectedData = data.find(contact => contact.name === argv.name);
     const selectedIndex = data.findIndex(contact => contact.name === argv.name);
 
-    // console.log(data);
     if (selectedData == undefined) {
       console.log('Data tidak di temukan');
     } else {
