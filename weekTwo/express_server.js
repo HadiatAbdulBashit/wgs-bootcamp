@@ -1,9 +1,9 @@
 const express = require('express')
 const path = require('path');
+var expressLayouts = require('express-ejs-layouts');
 
 const app = express()
 const port = 3000
-
 
 const contacts = [
     {
@@ -20,7 +20,10 @@ const contacts = [
     }
 ]
 
+app.set('layout', './fullpage')
 app.set('view engine', 'ejs')
+
+app.use(expressLayouts);
 
 app.get('/', (req, res) => {
     // res.sendFile(path.join(__dirname, './views/index.html'));

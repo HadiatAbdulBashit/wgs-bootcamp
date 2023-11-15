@@ -1,11 +1,8 @@
-<%- include('layout/header') %>
-    <%- include('layout/nav') %>
-        <h1>List Contact</h1>
-        <br>
-        <% contacts.forEach(contact=> { %>
-            <p>Nama: <%= contact.nama %>
-            </p>
-            <p>No Telp: <%= contact.telp %>
-            </p>
-            <% }) %>
-                <%- include('layout/footer') %>
+<h1>List Contact</h1>
+<br>
+<% contacts.forEach(contact=> { %>
+<p>Nama: <%= contact.nama %>
+</p>
+<p>No Telp: <%= contact.telp %>
+</p>
+<% }) %>
