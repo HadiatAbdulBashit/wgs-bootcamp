@@ -23,14 +23,15 @@ const contacts = [
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './views/index.html'));
+    // res.sendFile(path.join(__dirname, './views/index.html'));
+    res.render('index', {title: 'Home'})
 })
 app.get('/about', (req, res) => {
     res.render('about', {nama: 'Hadiat Abdul', title: 'About'})
 })
 app.get('/contact', (req, res) => {
     // res.sendFile('./views/contact.html', {root: __dirname})
-    res.render('contact', {contacts})
+    res.render('contact', {contacts,  title: 'Contact'})
 })
 app.get('/product/:id', (req, res) => {
     res.send('<h1>product id: ' + req.params.id + '<br>Category: ' + req.query.category + '<h1>')
