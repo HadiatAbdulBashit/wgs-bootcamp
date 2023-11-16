@@ -1,10 +1,12 @@
 const express = require('express')
 var expressLayouts = require('express-ejs-layouts');
+const morgan = require('morgan');
 
 const app = express()
 const port = 3000
 
 app.use(express.static('public'));
+app.use(morgan('dev'));
 
 const contacts = [
     {
@@ -36,7 +38,6 @@ app.get('/', (req, res) => {
 })
 app.get('/about', (req, res) => {
     res.render('about', { nama: 'Hadiat Abdul', title: 'About' })
-    // next()
 })
 app.get('/contact', (req, res) => {
     res.render('contact', { contacts, title: 'Contact' })
