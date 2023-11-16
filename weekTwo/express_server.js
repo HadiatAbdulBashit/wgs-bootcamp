@@ -1,32 +1,19 @@
 const express = require('express')
 var expressLayouts = require('express-ejs-layouts');
 const morgan = require('morgan');
+const savedContact = require('./read_contact');
+const contacts = JSON.parse(savedContact);
 
 const app = express()
 const port = 3000
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
-
-const contacts = [
-    {
-        nama: 'hadiat',
-        telp: '08231827612'
-    },
-    {
-        nama: 'abdul',
-        telp: '08123782131'
-    },
-    {
-        nama: 'bashit',
-        telp: '06132873921'
-    }
-]
+app.use(expressLayouts);
 
 app.set('layout', './master')
 app.set('view engine', 'ejs')
 
-app.use(expressLayouts);
 
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
