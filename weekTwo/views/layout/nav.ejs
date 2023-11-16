@@ -1,12 +1,25 @@
-<h3>Link</h3>
-<ul>
-    <li>
-        <a href="/">Home</a>
-    </li>
-    <li>
-        <a href="/about">About</a>
-    </li>
-    <li>
-        <a href="/contact">Contact</a>
-    </li>
-</ul>
+<nav class="navbar sticky-top shadow-sm">
+    <div class="container">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <span class="fs-4">Contact App</span>
+        </a>
+
+        <ul class="nav nav-underline">
+            <li class="nav-item"><a href="/" class="nav-link
+                    <% if (title == 'Home') { %>
+                        active
+                    <% } %>
+                    " aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link
+                    <% if (title == 'About') { %>
+                        active
+                    <% } %>
+                    ">About</a></li>
+            <li class="nav-item"><a href="/contact" class="nav-link
+                    <% if (title == 'Contact') { %>
+                        active
+                    <% } %>
+                    ">Contact</a></li>
+        </ul>
+    </div>
+</nav>
