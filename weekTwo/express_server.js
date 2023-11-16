@@ -14,7 +14,6 @@ app.use(expressLayouts);
 app.set('layout', './master')
 app.set('view engine', 'ejs')
 
-
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
     next()
@@ -23,12 +22,19 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' })
 })
+
 app.get('/about', (req, res) => {
-    res.render('about', { nama: 'Hadiat Abdul', title: 'About' })
+    res.render('about', { nama: 'Hadiat Abdul B', title: 'About' })
 })
+
 app.get('/contact', (req, res) => {
     res.render('contact', { contacts, title: 'Contact' })
 })
+
+app.get('/contact/add', (req, res) => {
+    res.render('form', { contacts, title: 'Add Contact' })
+})
+
 app.get('/product/:id', (req, res) => {
     res.send('<h1>product id: ' + req.params.id + '<br>Category: ' + req.query.category + '<h1>')
 })
@@ -39,5 +45,5 @@ app.use('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}/`);
+    console.log(`Contact app listening on port http://localhost:${port}/`);
 })
