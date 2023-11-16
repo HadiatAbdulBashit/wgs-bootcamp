@@ -1,12 +1,16 @@
 const express = require('express')
 var expressLayouts = require('express-ejs-layouts');
 const morgan = require('morgan');
+var bodyParser = require('body-parser')
 const savedContact = require('./read_contact');
+const saveContact = require('./save_contact');
 const contacts = JSON.parse(savedContact);
 
 const app = express()
 const port = 3000
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(expressLayouts);
@@ -32,7 +36,12 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/contact/add', (req, res) => {
-    res.render('form', { contacts, title: 'Add Contact' })
+    res.render('form', { title: 'Add Contact' })
+})
+
+app.post('/contact/add', (req, res) => {
+    saveContact(req.body.name, req.body.phone, req.body.email)
+    res.redirect('/contact')
 })
 
 app.get('/product/:id', (req, res) => {
