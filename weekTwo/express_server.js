@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 const savedContact = require('./read_contact');
 const saveContact = require('./save_contact');
 const contacts = JSON.parse(savedContact);
+const fs = require('fs');
 
 const app = express()
 const port = 3000
@@ -41,6 +42,26 @@ app.get('/contact/add', (req, res) => {
 
 app.post('/contact/add', (req, res) => {
     saveContact(req.body.name, req.body.phone, req.body.email)
+    res.redirect('/contact')
+})
+
+app.get('/contact/delete/:name', (req, res) => {
+    const selectedData = contacts.find(contact => contact.name === req.params.name);
+    const selectedIndex = contacts.findIndex(contact => contact.name === req.params.name);
+
+    if (selectedData == undefined) {
+      console.log('Data tidak di temukan');
+    } else {
+      contacts.splice(selectedIndex, 1)
+      
+      fs.writeFile('./data/contacts.json', JSON.stringify(contacts), 'utf8', (err) => {
+        if (err) {
+          console.error('Error write to file:', err);
+        } else {
+          console.log('Contact deleted!');
+        }
+      });
+    }
     res.redirect('/contact')
 })
 
