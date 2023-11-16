@@ -1,8 +1,41 @@
-<h1>List Contact</h1>
-<br>
-<% contacts.forEach(contact=> { %>
-<p>Nama: <%= contact.nama %>
-</p>
-<p>No Telp: <%= contact.telp %>
-</p>
-<% }) %>
+<div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+  <h1>List Contact</h1>
+  <a href="/contact/add" class="btn btn-primary">Add Contact</a>
+</div>
+<% if (contacts.length === 0) { %>
+  <div class="alert alert-danger" role="alert">
+    No contact saved
+  </div>
+<% } else { %>
+  <table class="table table-sm table-striped align-middle" style="text-align: center;">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% let index=0 %>
+        <% contacts.forEach((contact, index)=> { %>
+          <tr>
+            <th scope="row">
+              <%= index++ %>
+            </th>
+            <td>
+              <%= contact.name %>
+            </td>
+            <td>
+              <%= contact.phone %>
+            </td>
+            <td class="justify-content-end">
+              <a href="/contact/<%= contact.name %>" class="btn btn-primary btn-sm">Detail</a>
+              <button type="button" class="btn btn-warning btn-sm">Edit</button>
+              <a href="/contact/destroy/<%= contact.name %>" onclick="alert('apakah yakin')" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <% }) %>
+    </tbody>
+  </table>
+<% } %>
