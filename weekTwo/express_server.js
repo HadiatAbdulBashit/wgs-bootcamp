@@ -44,8 +44,9 @@ app.post('/contact/add', (req, res) => {
     res.redirect('/contact')
 })
 
-app.get('/product/:id', (req, res) => {
-    res.send('<h1>product id: ' + req.params.id + '<br>Category: ' + req.query.category + '<h1>')
+app.get('/contact/:name', (req, res) => {
+    const selectedData = contacts.find(contact => contact.name == req.params.name);
+    res.render('detail', { title: 'Detail', selectedData })
 })
 
 app.use('/', (req, res) => {

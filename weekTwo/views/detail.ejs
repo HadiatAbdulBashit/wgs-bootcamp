@@ -1,0 +1,26 @@
+<% if (!selectedData) { %>
+    <div class="alert alert-danger my-5" role="alert">
+        Contact not found
+    </div>
+<% } else { %>
+    <div style="display: flex; justify-content: center;">
+        <div class="card my-5 rounded-4" style="width: 24rem;">
+            <div class="card-header p-3 mb-3">
+                <h1><%= selectedData.name %></h1>
+            </div>
+            <div class="container">
+                <div class="row row-cols-2 px-3">
+                    <div class="col-4">Phone:</div>
+                    <div class="col-8"><strong><%= selectedData.phone %></strong></div>
+                    <div class="col-4">Email:</div>
+                    <div class="col-8"><strong><%= selectedData.email %></strong></div>
+                </div>
+                <div class="row justify-content-center p-3">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
