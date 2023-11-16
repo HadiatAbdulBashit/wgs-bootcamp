@@ -1,0 +1,46 @@
+<div class="container px-5 my-5 bg-light rounded-4">
+    <h1 class="pt-5"><%= title %></h1>
+    <form action="/contact/edit/<%= selectedData.name %>" method="post" class="py-5">
+        <div class="form-floating mb-3">
+            <input 
+            type="text" 
+            name="name" 
+            class="form-control" 
+            id="floatingInput"
+            <% if (selectedData) { %>
+                value="<%= selectedData.name %>"
+            <% } %>
+            >
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input 
+            type="text" 
+            name="phone" 
+            class="form-control" 
+            id="floatingPhone" 
+            placeholder="Phone"
+            <% if (selectedData) { %>
+                value="<%= selectedData.phone %>"
+            <% } %>
+            >
+            <label for="floatingPhone">Phone</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input 
+            type="email" 
+            name="email" 
+            class="form-control" 
+            id="floatingEmail" 
+            placeholder="Email"
+            <% if (selectedData) { %>
+                value="<%= selectedData.email %>"
+            <% } %>
+            >
+            <label for="floatingEmail">Email</label>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Save Contact</button>
+        </div>
+    </form>
+</div>

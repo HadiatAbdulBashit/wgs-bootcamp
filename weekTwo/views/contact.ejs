@@ -31,7 +31,7 @@
             </td>
             <td class="justify-content-end">
               <a href="/contact/<%= contact.name %>" class="btn btn-primary btn-sm">Detail</a>
-              <button type="button" class="btn btn-warning btn-sm">Edit</button>
+              <a href="/contact/edit/<%= contact.name %>" class="btn btn-warning btn-sm">Edit</a>
               <a href="/contact/delete/<%= contact.name %>" onclick="return confirm('Are you sure want to delete <%= contact.name %>?')" class="btn btn-danger btn-sm">Delete</a>
             </td>
           </tr>

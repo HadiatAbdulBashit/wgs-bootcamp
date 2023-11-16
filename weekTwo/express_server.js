@@ -45,6 +45,32 @@ app.post('/contact/add', (req, res) => {
     res.redirect('/contact')
 })
 
+app.get('/contact/edit/:name', (req, res) => {
+    const selectedData = contacts.find(contact => contact.name == req.params.name);
+    res.render('edit-form', { title: 'Edit Contact', selectedData})
+})
+
+app.post('/contact/edit/:name', (req, res) => {
+    const selectedData = contacts.find(contact => contact.name === req.params.name);
+
+    if (selectedData == undefined) {
+      console.log('Data tidak di temukan');
+    } else {
+      selectedData.name = req.body.name ?? selectedData.name
+      selectedData.phone = req.body.phone ?? selectedData.phone
+      selectedData.email = req.body.email ?? selectedData.email
+
+      fs.writeFile('./data/contacts.json', JSON.stringify(contacts), 'utf8', (err) => {
+        if (err) {
+          console.error('Error write to file:', err);
+        } else {
+          console.log('Contact updated!');
+        }
+      });
+    }
+    res.redirect('/contact')
+})
+
 app.get('/contact/delete/:name', (req, res) => {
     const selectedData = contacts.find(contact => contact.name === req.params.name);
     const selectedIndex = contacts.findIndex(contact => contact.name === req.params.name);
