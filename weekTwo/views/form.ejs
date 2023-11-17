@@ -1,16 +1,37 @@
 <div class="container px-5 my-5 bg-light rounded-4">
     <h1 class="pt-5"><%= title %></h1>
-    <form action="/contact/add" method="post" class="py-5">
+    <% if (typeof errors != 'undefined') { %>
+        <div class="alert alert-danger pb-0">
+            <ul>
+                <% errors.forEach(error => { %>
+                 <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+    <form action="/contact/add" method="post" class="pb-3">
         <div class="form-floating mb-3">
-            <input type="text" name="name" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="text" name="name" class="form-control" id="floatingInput" placeholder="name@example.com" 
+            <% if (name != 'undefined') { %>
+                value="<%= name %>"
+            <% } %>
+            >
             <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" name="phone" class="form-control" id="floatingPhone" placeholder="Phone">
+            <input type="text" name="phone" class="form-control" id="floatingPhone" placeholder="Phone" 
+            <% if (phone != 'undefined') { %>
+                value="<%= phone %>"
+            <% } %>
+            >
             <label for="floatingPhone">Phone</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email">
+            <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email" 
+            <% if (email != 'undefined') { %>
+                value="<%= email %>"
+            <% } %>
+            >
             <label for="floatingEmail">Email</label>
         </div>
         <div class="col-auto">

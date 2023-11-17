@@ -12,9 +12,8 @@ const savedContact = fs.readFileSync('./data/contacts.json', 'utf8', (err, data)
             return;
         }
     }
-    // console.log(data);
+    // Mengembalikan data dalam berntuk string
     return data;
 })
 
-// console.log(savedContact);
 module.exports = savedContact;

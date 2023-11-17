@@ -6,6 +6,7 @@ const savedContact = require('./read_contact');
 const saveContact = require('./save_contact');
 const contacts = JSON.parse(savedContact);
 const fs = require('fs');
+const { body, validationResult, check} = require('express-validator');
 
 const app = express()
 const port = 3000
@@ -15,6 +16,10 @@ app.use(bodyParser.json())
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(expressLayouts);
+
+const duplicateCheck = (name) => {
+  return contacts.find((contact) => contact.name === name)  
+}
 
 app.set('layout', './master')
 app.set('view engine', 'ejs')
@@ -37,10 +42,31 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/contact/add', (req, res) => {
-    res.render('form', { title: 'Add Contact' })
+    res.render('form', { title: 'Add Contact', name: '', phone: '', email: '' })
 })
 
-app.post('/contact/add', (req, res) => {
+app.post('/contact/add', [
+  body('name').custom((name)=> {
+    const duplicate = duplicateCheck(name)
+    if (duplicate) {
+      throw new Error('Name already exixst')
+    }
+    return true
+  }),
+  check('phone', 'Phone not valid!').isMobilePhone('id-ID'),
+  check('email', 'Email not valid!').isEmail(),
+  ], (req, res) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.render('form', {
+        title: 'Add Contact',
+        errors: error.array(),
+        name: req.body.name, 
+        phone: req.body.phone, 
+        email: req.body.email
+      })
+    }
+
     saveContact(req.body.name, req.body.phone, req.body.email)
     res.redirect('/contact')
 })
