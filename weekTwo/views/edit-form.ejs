@@ -1,15 +1,22 @@
 <div class="container px-5 my-5 bg-light rounded-4">
     <h1 class="pt-5"><%= title %></h1>
-    <form action="/contact/edit/<%= selectedData.name %>" method="post" class="py-5">
+    <% if (typeof errors != 'undefined') { %>
+        <div class="alert alert-danger pb-0">
+            <ul>
+                <% errors.forEach(error => { %>
+                 <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+    <form action="/contact/edit/<%= selectedData.name %>" method="post" class="pb-3">
         <div class="form-floating mb-3">
             <input 
             type="text" 
             name="name" 
             class="form-control" 
             id="floatingInput"
-            <% if (selectedData) { %>
-                value="<%= selectedData.name %>"
-            <% } %>
+            value="<%= name || selectedData.name %>"
             >
             <label for="floatingInput">Name</label>
         </div>
@@ -20,9 +27,7 @@
             class="form-control" 
             id="floatingPhone" 
             placeholder="Phone"
-            <% if (selectedData) { %>
-                value="<%= selectedData.phone %>"
-            <% } %>
+            value="<%= phone || selectedData.phone %>"
             >
             <label for="floatingPhone">Phone</label>
         </div>
@@ -33,9 +38,7 @@
             class="form-control" 
             id="floatingEmail" 
             placeholder="Email"
-            <% if (selectedData) { %>
-                value="<%= selectedData.email %>"
-            <% } %>
+            value="<%= email || selectedData.email %>"
             >
             <label for="floatingEmail">Email</label>
         </div>

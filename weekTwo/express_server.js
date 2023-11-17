@@ -73,11 +73,32 @@ app.post('/contact/add', [
 
 app.get('/contact/edit/:name', (req, res) => {
     const selectedData = contacts.find(contact => contact.name == req.params.name);
-    res.render('edit-form', { title: 'Edit Contact', selectedData})
+    res.render('edit-form', { title: 'Edit Contact', selectedData, name: null, email: null, phone: null})
 })
 
-app.post('/contact/edit/:name', (req, res) => {
-    const selectedData = contacts.find(contact => contact.name === req.params.name);
+app.post('/contact/edit/:name', [
+  body('name').custom((name, {req})=> {
+    const duplicate = duplicateCheck(name)
+    if (duplicate && name != req.params.name) {
+      throw new Error('Name already exixst')
+    }
+    return true
+  }),
+  check('phone', 'Phone not valid!').isMobilePhone('id-ID'),
+  check('email', 'Email not valid!').isEmail(),
+  ], (req, res) => {
+    const error = validationResult(req);
+    const selectedData = contacts.find(contact => contact.name == req.params.name);
+    if (!error.isEmpty()) {
+      return res.render('edit-form', {
+        title: 'Edit Contact',
+        errors: error.array(),
+        selectedData,
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email
+      })
+    }
 
     if (selectedData == undefined) {
       console.log('Data tidak di temukan');
