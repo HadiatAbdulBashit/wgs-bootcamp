@@ -28,6 +28,4 @@ console.log(`Name         : ${argv.name}`);
 console.log(`Phone Number : ${argv.phone}`);
 console.log(`Email        : ${argv.email}`);
 
-const newContact = {name:argv.name, phone:argv.phone, email:argv.email}
-
-saveContact(newContact);
+saveContact(argv.name, argv.phone, argv.email);
