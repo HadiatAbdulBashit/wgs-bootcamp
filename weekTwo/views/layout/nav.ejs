@@ -1,20 +1,25 @@
 <nav class="navbar sticky-top shadow-sm bg-white">
     <div class="container">
+        <!-- Logo dan judul aplikasi dengan link kembali ke halaman utama -->
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <span class="fs-4">Contact App</span>
         </a>
 
+        <!-- Daftar menu navigasi -->
         <ul class="nav nav-underline">
+            <!-- Menu "Home" -->
             <li class="nav-item"><a href="/" class="nav-link
                     <% if (title == 'Home') { %>
                         active
                     <% } %>
                     " aria-current="page">Home</a></li>
+            <!-- Menu "About" -->
             <li class="nav-item"><a href="/about" class="nav-link
                     <% if (title == 'About') { %>
                         active
                     <% } %>
                     ">About</a></li>
+            <!-- Menu "Contact" -->
             <li class="nav-item"><a href="/contact" class="nav-link
                     <% if (title == 'Contact') { %>
                         active

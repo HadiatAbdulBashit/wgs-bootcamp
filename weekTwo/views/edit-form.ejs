@@ -1,15 +1,22 @@
 <div class="container px-5 my-5 bg-light rounded-4">
+    <!-- Judul halaman dinamis dari variabel title -->
     <h1 class="pt-5"><%= title %></h1>
+    
+    <!-- Menampilkan pesan kesalahan jika ada -->
     <% if (typeof errors != 'undefined') { %>
         <div class="alert alert-danger pb-0">
             <ul>
+                <!-- Menampilkan setiap pesan kesalahan -->
                 <% errors.forEach(error => { %>
-                 <li><%= error.msg %></li>
+                    <li><%= error.msg %></li>
                 <% }) %>
             </ul>
         </div>
     <% } %>
+
+    <!-- Formulir untuk mengedit kontak -->
     <form action="/contact/edit/<%= selectedData.name %>" method="post" class="pb-3">
+        <!-- Input untuk nama -->
         <div class="form-floating mb-3">
             <input 
             type="text" 
@@ -20,6 +27,8 @@
             >
             <label for="floatingInput">Name</label>
         </div>
+        
+        <!-- Input untuk nomor telepon -->
         <div class="form-floating mb-3">
             <input 
             type="text" 
@@ -31,6 +40,8 @@
             >
             <label for="floatingPhone">Phone</label>
         </div>
+        
+        <!-- Input untuk alamat email -->
         <div class="form-floating mb-3">
             <input 
             type="email" 
@@ -42,6 +53,8 @@
             >
             <label for="floatingEmail">Email</label>
         </div>
+        
+        <!-- Tombol untuk menyimpan perubahan kontak -->
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Save Contact</button>
         </div>

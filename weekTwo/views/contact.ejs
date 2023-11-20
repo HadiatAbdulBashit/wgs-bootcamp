@@ -1,14 +1,19 @@
+<!-- Bagian header dengan judul dan tombol untuk menambahkan kontak -->
 <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
   <h1>List Contact</h1>
   <a href="/contact/add" class="btn btn-primary">Add Contact</a>
 </div>
+
 <% if (contacts.length === 0) { %>
+  <!-- Pesan kesalahan jika tidak ada kontak yang disimpan -->
   <div class="alert alert-danger" role="alert">
     No contact saved
   </div>
 <% } else { %>
+  <!-- Tabel untuk menampilkan daftar kontak -->
   <table class="table table-sm table-striped align-middle" style="text-align: center;">
     <thead class="table-dark">
+      <!-- Header tabel dengan kolom-kolom yang ditentukan -->
       <tr>
         <th scope="col">No</th>
         <th scope="col">Name</th>
@@ -17,25 +22,30 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Looping melalui setiap kontak untuk menampilkan dalam tabel -->
       <% let index=0 %>
-        <% contacts.forEach((contact, index)=> { %>
-          <tr>
-            <th scope="row">
-              <%= index + 1 %>
-            </th>
-            <td>
-              <%= contact.name %>
-            </td>
-            <td>
-              <%= contact.phone %>
-            </td>
-            <td class="justify-content-end">
-              <a href="/contact/<%= contact.name %>" class="btn btn-primary btn-sm">Detail</a>
-              <a href="/contact/edit/<%= contact.name %>" class="btn btn-warning btn-sm">Edit</a>
-              <a href="/contact/delete/<%= contact.name %>" onclick="return confirm('Are you sure want to delete <%= contact.name %>?')" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-          </tr>
-          <% }) %>
+      <% contacts.forEach((contact, index)=> { %>
+        <tr>
+          <!-- Nomor urut -->
+          <th scope="row">
+            <%= index + 1 %>
+          </th>
+          <!-- Nama kontak -->
+          <td>
+            <%= contact.name %>
+          </td>
+          <!-- Nomor telepon kontak -->
+          <td>
+            <%= contact.phone %>
+          </td>
+          <!-- Tombol aksi: Detail, Edit, Delete -->
+          <td class="justify-content-end">
+            <a href="/contact/<%= contact.name %>" class="btn btn-primary btn-sm">Detail</a>
+            <a href="/contact/edit/<%= contact.name %>" class="btn btn-warning btn-sm">Edit</a>
+            <a href="/contact/delete/<%= contact.name %>" onclick="return confirm('Are you sure want to delete <%= contact.name %>?')" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
     </tbody>
   </table>
 <% } %>

@@ -2,23 +2,33 @@
 <html lang="en">
 
 <head>
+    <!-- Set karakter set dan kompatibilitas IE -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Pengaturan tampilan untuk perangkat mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Menggunakan Bootstrap CSS dari CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Menggunakan stylesheet kustom -->
     <link rel="stylesheet" href="/style/style.css">
+    <!-- Menampilkan judul halaman dinamis dari variabel title -->
     <title>
         <%= title %>
     </title>
 </head>
 
 <body>
+    <!-- Include file navigasi -->
     <%- include('./layout/nav.ejs') %>
-        <div class="container">
-            <%- body %>
-        </div>
+    <!-- Kontainer utama menggunakan Bootstrap untuk responsivitas -->
+    <div class="container">
+        <!-- Isi halaman yang akan ditampilkan -->
+        <%- body %>
+    </div>
+    <!-- Include file footer -->
     <%- include('./layout/footer.ejs') %>
 </body>
+<!-- Menggunakan Bootstrap JS dari CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

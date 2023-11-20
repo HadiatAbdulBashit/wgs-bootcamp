@@ -1,20 +1,25 @@
 <% if (!selectedData) { %>
+    <!-- Pesan kesalahan jika kontak tidak ditemukan -->
     <div class="alert alert-danger my-5" role="alert">
         Contact not found
     </div>
 <% } else { %>
+    <!-- Tampilan detail kontak -->
     <div style="display: flex; justify-content: center;">
         <div class="card my-5 rounded-4" style="width: 24rem;">
+            <!-- Header kartu dengan nama kontak -->
             <div class="card-header p-3 mb-3">
                 <h1><%= selectedData.name %></h1>
             </div>
             <div class="container">
+                <!-- Informasi kontak: Phone dan Email -->
                 <div class="row row-cols-2 px-3">
                     <div class="col-4">Phone:</div>
                     <div class="col-8"><strong><%= selectedData.phone %></strong></div>
                     <div class="col-4">Email:</div>
                     <div class="col-8"><strong><%= selectedData.email %></strong></div>
                 </div>
+                <!-- Tombol untuk menghapus kontak dengan konfirmasi -->
                 <div class="row justify-content-center p-3">
                     <a href="/contact/delete/<%= selectedData.name %>" onclick="return confirm('Are you sure want to delete <%= selectedData.name %>?')" class="btn btn-danger btn-sm">Delete</a>
                 </div>
