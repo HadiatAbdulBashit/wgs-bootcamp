@@ -1,10 +1,10 @@
 function Footer() {
   return (
-    <footer class="py-3 border-top">
-      <div class="container justify-content-center d-flex">
-        <span class="text-body-secondary ali">© 2023 Hadiat</span>
+    <div className="ui vertical footer segment">
+      <div className="ui center aligned container">
+        @2023 Hadiat
       </div>
-    </footer>
+    </div>
   );
 }
 
