@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import React from 'react';
 import "./App.css";
 
 const randomName = faker.person.fullName();
@@ -13,25 +14,48 @@ const data = {
   comment: randomComment
 }
 
-function App() {
-  return (
-    <div className="ui container comments">
-      <div className="comment">
-        <a href="/" className="avatar">
-          <img src={data.avatar} alt="avatar" />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            {data.name}
+// function App() {
+//   return (
+//     <div className="ui container comments">
+//       <div className="comment">
+//         <a href="/" className="avatar">
+//           <img src={data.avatar} alt="avatar" />
+//         </a>
+//         <div className="content">
+//           <a href="/" className="author">
+//             {data.name}
+//           </a>
+//           <div className="metadata">
+//             <span className="date">{data.time}</span>
+//           </div>
+//           <div className="text">{data.comment}</div>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="ui container comments">
+        <div className="comment">
+          <a href="/" className="avatar">
+            <img src={data.avatar} alt="avatar" />
           </a>
-          <div className="metadata">
-            <span className="date">{data.time}</span>
+          <div className="content">
+            <a href="/" className="author">
+              {data.name}
+            </a>
+            <div className="metadata">
+              <span className="date">{data.time}</span>
+            </div>
+            <div className="text">{data.comment}</div>
           </div>
-          <div className="text">{data.comment}</div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default App;
