@@ -3,6 +3,7 @@ import React from 'react';
 
 import "./App.css";
 import Clock from './component/Clock';
+import ShowName from './component/ShowName';
 
 let dataComments = []
 
@@ -122,6 +123,7 @@ function App() {
   return (
     <div className='ui container'>
       <Clock />
+      <ShowName />
       <Comment data={dataComments} />
     </div>
   )
