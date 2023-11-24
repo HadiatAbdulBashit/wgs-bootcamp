@@ -3,6 +3,7 @@ import React from 'react';
 
 import "./App.css";
 import Clock from './component/Clock';
+import GetPicture from './component/GetPicture';
 import ShowName from './component/ShowName';
 
 let dataComments = []
@@ -124,6 +125,7 @@ function App() {
     <div className='ui container'>
       <Clock />
       <ShowName />
+      <GetPicture />
       <Comment data={dataComments} />
     </div>
   )
