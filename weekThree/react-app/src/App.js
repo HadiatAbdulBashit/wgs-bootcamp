@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 import React from 'react';
+
 import "./App.css";
+import Clock from './component/Clock';
 
 let dataComments = []
 
@@ -119,6 +121,7 @@ class Comment extends React.Component {
 function App() {
   return (
     <div className='ui container'>
+      <Clock />
       <Comment data={dataComments} />
     </div>
   )
