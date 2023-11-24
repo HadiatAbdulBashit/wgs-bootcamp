@@ -8,8 +8,10 @@ for (let index = 0; index < 10; index++) {
   const randomName = faker.person.fullName();
   const randomAvatar = faker.image.avatar();
   const randomTime = faker.date.recent().toLocaleTimeString();
+  const randomDate = faker.date.recent().toLocaleDateString();
   const randomComment = faker.lorem.paragraph();
-  dataComments.push({ name: randomName, avatar: randomAvatar, time: randomTime, comment: randomComment, like: 0 })
+  const randomLiked = Math.floor(Math.random() * 9101);
+  dataComments.push({ name: randomName, avatar: randomAvatar, time: randomTime, date: randomDate, comment: randomComment, liked: randomLiked })
 }
 
 // console.log(data);  
@@ -37,35 +39,52 @@ for (let index = 0; index < 10; index++) {
 
 class CommentContainer extends React.Component {
   state = {
-    like: this.props.like,
+    like: false,
+    liked: this.props.liked
   };
 
   handleLikeChange = () => {
-    this.setState(prevState => {
-      return {
-        like: prevState.like + 1
-      };
-    });
-    // console.log(this.state.like);
+    if (this.state.like) {
+      this.setState({
+        like: !this.state.like,
+        liked: this.state.liked-1
+      });
+    } else {
+      this.setState({
+        like: !this.state.like,
+        liked: this.state.liked+1
+      });
+    }
   }
 
   render() {
     return (
-      <div className="ui container comments">
-        <div className="comment">
-          <a href="/" className="avatar">
-            <img src={this.props.avatar} alt="avatar" />
-          </a>
-          <div className="content">
-            <a href="/" className="author">
-              {this.props.name}
+      <div className='content'>
+        <div className="ui container comments">
+          <div className="comment">
+            <a href="/" className="avatar">
+              <img src={this.props.avatar} alt="avatar" />
             </a>
-            <div className="metadata">
-              <span className="date">{this.props.time}</span>
-              <span>| Liked: {this.state.like}</span>
+            <div className="content">
+              <a href="/" className="author">
+                {this.props.name}
+              </a>
+              <div className="metadata">
+                <span className="date">{this.props.time}</span>
+                <span className="date">
+                  {this.props.date}
+                </span>
+              </div>
+              <div className="text">{this.props.comment}</div>
+              <div class="ui labeled button" tabindex="0">
+                <div class={"ui button " + (this.state.like ? 'red' : '')} onClick={this.handleLikeChange}>
+                  <i class={"heart " + (this.state.like ? '' : 'outline') + " icon"}></i> Like
+                </div>
+                <div class={(this.state.like ? 'ui basic red left pointing label' : "ui basic label")}>
+                  {this.state.liked}
+                </div>
+              </div>
             </div>
-            <div className="text">{this.props.comment}</div>
-            <button onClick={this.handleLikeChange}>Like</button>
           </div>
         </div>
       </div>
@@ -79,27 +98,30 @@ class Comment extends React.Component {
     this.state = {
       count: 0,
     }
-    // console.log(this.props.data);
   }
 
   render() {
     return this.props.data.map((dataComment, index, like) => (
-      <div className="commentContainer" key={index}>
+      <div className="ui card" style={{ width: '100%' }} key={index}>
         <CommentContainer
           avatar={dataComment.avatar}
           name={dataComment.name}
           time={dataComment.time}
+          date={dataComment.date}
           comment={dataComment.comment}
-          like={dataComment.like}
+          liked={dataComment.liked}
         />
       </div>
     ));
   }
 }
 
-function App () {
-  // console.log(dataComments);
-  return <Comment data={dataComments} />
+function App() {
+  return (
+    <div className='ui container'>
+      <Comment data={dataComments} />
+    </div>
+  )
 }
 
 export default App;
