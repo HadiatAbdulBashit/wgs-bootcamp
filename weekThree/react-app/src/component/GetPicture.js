@@ -2,6 +2,24 @@ import { Component } from "react";
 import axios from "axios";
 
 class GetPicture extends Component {
+    constructor(props) {
+        super(props);
+
+        this.textInput = null;
+
+        this.setTextInputRef = element => {
+            this.textInput = element;
+        };
+
+        this.focusTextInput = () => {
+            if (this.textInput) this.textInput.focus();
+        };
+    }
+
+    componentDidMount() {
+        this.focusTextInput();
+    }
+
     state = {
         images: [],
         searchTerm: '',
@@ -24,26 +42,25 @@ class GetPicture extends Component {
         return (
             <div>
                 <form onSubmit={this.onSearchSubmit} class="ui form">
-                        <div class="field">
-                            <label>Search Picture</label>
-                            <input 
-                            type="text" 
+                    <div class="field">
+                        <label>Search Picture</label>
+                        <input
+                            type="text"
                             placeholder="Search..."
                             value={this.state.searchTerm}
                             onChange={(e) => this.setState({ searchTerm: e.target.value })}
-                            />
-                        </div>
-                        <input type="submit" value="Search" class="ui button" />
+                            ref={this.setTextInputRef}
+                        />
+                    </div>
+                    <input type="submit" value="Search" class="ui button" onClick={this.focusTextInput} />
                 </form>
-                <ul>
+                <div className="mansonry">
                     {this.state.images.map((image) => (
-                        <li key={image.id}>
-                            <a href={image.urls.full} target=''>
-                                <img src={image.urls.thumb} alt={image.description} />
-                            </a>
-                        </li>
+                        <a href={image.urls.full} target='_blank' key={image.id}>
+                            <img src={image.urls.thumb} alt={image.description} className='rounded-lg mb-4' />
+                        </a>
                     ))}
-                </ul>
+                </div>
             </div>
         );
     }
