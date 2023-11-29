@@ -32,6 +32,7 @@ img {
 .mansonry {
   column-count: 1;
   column-gap: 5px;
+  margin: 25px 0;
 }
 
 @media (min-width: 500px) {
@@ -48,4 +49,23 @@ img {
   .mansonry {
     column-count: 4;
   }
+}
+
+.clock {
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.ui .search {
+  margin: 50px 0;
+}
+
+.get-picture {
+  margin: 50px 0;
+}
+
+.mansonry a img{
+  border-radius: 10px;
 }
