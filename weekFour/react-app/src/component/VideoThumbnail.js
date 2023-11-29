@@ -1,15 +1,16 @@
-function VideoThumbnail({ video }) {
+function VideoThumbnail({ videos, setSelectedVideo }) {
     return (
-        <div className="ui card full-width">
-            <h2>{video.snippet.title}</h2>
-            <p>{video.snippet.description}</p>
-            <iframe
-                title={video.snippet.title}
-                width="100%"
-                src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                frameborder="0"
-                allowfullscreen
-            ></iframe>
+        <div className="ui items segment">
+            {videos.slice(1).map((video) => (
+                <div key={video.id.videoId} className='item'>
+                    <img src={video.snippet.thumbnails.default.url} alt={video.snippet.title} className="ui small image" onClick={setSelectedVideo(video)} />
+                    <div className="content">
+                        <h4 onClick={setSelectedVideo(video)} >{video.snippet.title}</h4>
+                        <p>By: {video.snippet.channelTitle || 'Unknow'}</p>
+                        <a href={`https://www.youtube.com/embed/${video.id.videoId}`}>See on Youtube</a>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
