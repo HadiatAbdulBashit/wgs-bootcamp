@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Video from "./Video";
 import VideoThumbnail from "./VideoThumbnail";
@@ -7,6 +7,10 @@ function GetVideo() {
     const [query, setQuery] = useState('');
     const [selectedVideo, setSelectedVideo] = useState({})
     const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        searchYouTube()
+    },[])
 
     const searchYouTube = async () => {
         try {
