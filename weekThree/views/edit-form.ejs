@@ -1,0 +1,65 @@
+<div class="container px-5 my-5 bg-light rounded-4">
+    <!-- Judul halaman dinamis dari variabel title -->
+    <div class="row">
+        <h1 class="pt-5"><%= title %></h1>
+        
+        <!-- Menampilkan pesan kesalahan jika ada -->
+        <% if (typeof errors != 'undefined') { %>
+            <div class="alert alert-danger pb-0">
+                <ul>
+                    <!-- Menampilkan setiap pesan kesalahan -->
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+
+        <!-- Formulir untuk mengedit kontak -->
+        <form action="/contact/edit/<%= selectedData.id %>" method="post" class="pb-3">
+            <input type="hidden" name="id" value="<%= selectedData.id %>">
+            <!-- Input untuk nama -->
+            <div class="form-floating mb-3">
+                <input 
+                type="text" 
+                name="name" 
+                class="form-control" 
+                id="floatingInput"
+                value="<%= name || selectedData.name %>"
+                >
+                <label for="floatingInput">Name</label>
+            </div>
+            
+            <!-- Input untuk nomor telepon -->
+            <div class="form-floating mb-3">
+                <input 
+                type="text" 
+                name="phone" 
+                class="form-control" 
+                id="floatingPhone" 
+                placeholder="Phone"
+                value="<%= phone || selectedData.phone %>"
+                >
+                <label for="floatingPhone">Phone</label>
+            </div>
+            
+            <!-- Input untuk alamat email -->
+            <div class="form-floating mb-3">
+                <input 
+                type="email" 
+                name="email" 
+                class="form-control" 
+                id="floatingEmail" 
+                placeholder="Email"
+                value="<%= email || selectedData.email %>"
+                >
+                <label for="floatingEmail">Email</label>
+            </div>
+            
+            <!-- Tombol untuk menyimpan perubahan kontak -->
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Save Contact</button>
+            </div>
+        </form>
+    </div>
+</div>
